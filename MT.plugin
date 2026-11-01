@@ -57,14 +57,14 @@ IP-CIDR6,2405:1480:1000:4::15/128,REJECT,no-resolve
 IP-CIDR6,2402:4e00:40:40::2:373/128,REJECT,no-resolve
 
 [Script]
-http-response ^https?://apimobile\.meituan\.com/aggroup/indexTab script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=MT-1
-http-response ^https?://feedguess\.meituan\.com/lycoris/scene/(gwc_feed1_2265|personalcenter_2154)(\?|$) script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=MT-2
-http-response ^https?://mt-personalcenter\.meituan\.com/usercenter/display script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=MT-3
-http-response ^https?://apimobile\.meituan\.com/group/v1/deal/searchpage/defaultword script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=MT-4
-http-response ^https?://apimobile\.meituan\.com/group/v1/deal/searchpage/hotword/city/divide/hotrecommend/ script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=MT-5
-http-response ^https?://assistify\.meituan\.com/assistant/getAppClientHornConfig script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=MT-6
-http-response ^https?://mop\.meituan\.com/mop/entry/shoppingCartEntry script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=MT-7
-http-response ^https?://mop\.meituan\.com/api/entryModule/startupPicture script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=MT-8
+http-response ^https?://apimobile\.meituan\.com/aggroup/indexTab script-path=https://raw.githubusercontent.com/ruiruizl/loon-rules/main/MT.js, requires-body=true, tag=MT-1
+http-response ^https?://feedguess\.meituan\.com/lycoris/scene/(gwc_feed1_2265|personalcenter_2154)(\?|$) script-path=https://raw.githubusercontent.com/ruiruizl/loon-rules/main/MT.js, requires-body=true, tag=MT-2
+http-response ^https?://mt-personalcenter\.meituan\.com/usercenter/display script-path=https://raw.githubusercontent.com/ruiruizl/loon-rules/main/MT.js, requires-body=true, tag=MT-3
+http-response ^https?://apimobile\.meituan\.com/group/v1/deal/searchpage/defaultword script-path=https://raw.githubusercontent.com/ruiruizl/loon-rules/main/MT.js, requires-body=true, tag=MT-4
+http-response ^https?://apimobile\.meituan\.com/group/v1/deal/searchpage/hotword/city/divide/hotrecommend/ script-path=https://raw.githubusercontent.com/ruiruizl/loon-rules/main/MT.js, requires-body=true, tag=MT-5
+http-response ^https?://assistify\.meituan\.com/assistant/getAppClientHornConfig script-path=https://raw.githubusercontent.com/ruiruizl/loon-rules/main/MT.js, requires-body=true, tag=MT-6
+http-response ^https?://mop\.meituan\.com/mop/entry/shoppingCartEntry script-path=https://raw.githubusercontent.com/ruiruizl/loon-rules/main/MT.js, requires-body=true, tag=MT-7
+http-response ^https?://mop\.meituan\.com/api/entryModule/startupPicture script-path=https://raw.githubusercontent.com/ruiruizl/loon-rules/main/MT.js, requires-body=true, tag=MT-8
 
 [MITM]
 hostname = apimobile.meituan.com, feedguess.meituan.com, mop.meituan.com, mt-personalcenter.meituan.com, assistify.meituan.com, httpdns.meituan.com, httpdnsmultiapi.meituan.com
