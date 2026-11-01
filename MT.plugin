@@ -1,9 +1,12 @@
-#!name=美团App 12.67.403
-#!desc=由 ZenmoFeiShi 的 Qx MT.snippet 自动转换而来，Loon 可用（上游每日自动同步）
+#!name=美团去广告
+#!desc=美团 App 12.67.403 去广告（埋点/猜你喜欢/搜索热词等），由 Surge MT.sgmodule 转换
 #!author=TG@ZenMoFiShi
+#!homepage=https://github.com/ruiruizl/loon-rules
+#!raw-url=https://raw.githubusercontent.com/ruiruizl/loon-rules/main/MT.plugin
+#!system=iOS, iPadOS
 # 上游来源：https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.snippet
 # 更新时间：2026-11-01 07:08:49（北京时间）
-# 规则总数：46（拦截规则 46，脚本 8）
+# 规则总数：46（拦截 46，脚本 8）
 
 [Rule]
 DOMAIN,shark-mt.meituan.com,REJECT
@@ -54,14 +57,14 @@ IP-CIDR6,2405:1480:1000:4::15/128,REJECT,no-resolve
 IP-CIDR6,2402:4e00:40:40::2:373/128,REJECT,no-resolve
 
 [Script]
-http-response ^https?://apimobile\.meituan\.com/aggroup/indexTab requires-body=true script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js tag=MT-1
-http-response ^https?://feedguess\.meituan\.com/lycoris/scene/(gwc_feed1_2265|personalcenter_2154)(\?|$) requires-body=true script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js tag=MT-2
-http-response ^https?://mt-personalcenter\.meituan\.com/usercenter/display requires-body=true script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js tag=MT-3
-http-response ^https?://apimobile\.meituan\.com/group/v1/deal/searchpage/defaultword requires-body=true script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js tag=MT-4
-http-response ^https?://apimobile\.meituan\.com/group/v1/deal/searchpage/hotword/city/divide/hotrecommend/ requires-body=true script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js tag=MT-5
-http-response ^https?://assistify\.meituan\.com/assistant/getAppClientHornConfig requires-body=true script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js tag=MT-6
-http-response ^https?://mop\.meituan\.com/mop/entry/shoppingCartEntry requires-body=true script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js tag=MT-7
-http-response ^https?://mop\.meituan\.com/api/entryModule/startupPicture requires-body=true script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js tag=MT-8
+http-response ^https?://apimobile\.meituan\.com/aggroup/indexTab script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=MT-1
+http-response ^https?://feedguess\.meituan\.com/lycoris/scene/(gwc_feed1_2265|personalcenter_2154)(\?|$) script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=MT-2
+http-response ^https?://mt-personalcenter\.meituan\.com/usercenter/display script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=MT-3
+http-response ^https?://apimobile\.meituan\.com/group/v1/deal/searchpage/defaultword script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=MT-4
+http-response ^https?://apimobile\.meituan\.com/group/v1/deal/searchpage/hotword/city/divide/hotrecommend/ script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=MT-5
+http-response ^https?://assistify\.meituan\.com/assistant/getAppClientHornConfig script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=MT-6
+http-response ^https?://mop\.meituan\.com/mop/entry/shoppingCartEntry script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=MT-7
+http-response ^https?://mop\.meituan\.com/api/entryModule/startupPicture script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=MT-8
 
 [MITM]
 hostname = apimobile.meituan.com, feedguess.meituan.com, mop.meituan.com, mt-personalcenter.meituan.com, assistify.meituan.com, httpdns.meituan.com, httpdnsmultiapi.meituan.com
