@@ -1,13 +1,16 @@
 /*
- * Muse2API Loon 反代脚本 (v2)
- * 劫持 api.openai.com 请求 → 改写转发到自建 muse2api-http 网关（流式透传）
+ * Muse2API Loon 反代脚本 (v2.1)
+ * 劫持 api.openai.com / muse.ai / api.muse.ai 请求 → 改写转发到自建 muse2api-http 网关（流式透传）
  *
+ * v2.1: 支持多源域名劫持（客户端 Base URL 可填 https://muse.ai/v1 或 https://api.muse.ai/v1）
  * v2: 上游地址自动跟随 —— 优先读 GitHub 的 muse-upstream.txt（本地缓存 120s），
  *     隧道换地址后无需改 Loon 参数；读取失败回退到参数 up。
  *
  * $argument: up=<网关基址(回退用)>&key=<网关Key>&model=<默认模型>&models=<模型列表>&auto=<1自动跟随/0关闭>&dbg=<1调试>
  */
 const RESOLVER = "https://raw.githubusercontent.com/ruiruizl/loon-rules/main/muse-upstream.txt";
+// 允许劫持的源域名（客户端 Base URL 可选其一）
+const ALLOWED_HOSTS = ["api.openai.com", "muse.ai", "api.muse.ai"];
 const ARG_UP = (arg.up || "").trim();
 const KEY = arg.key || "muse2api-local";
 const DEF_MODEL = arg.model || "muse-spark";
@@ -50,8 +53,11 @@ function resolveUp(cb) {
 function rewrite(up) {
   const url = $request.url || "";
   const method = ($request.method || "GET").toUpperCase();
-  const m = url.match(/^https?:\/\/api\.openai\.com(\/v1\/[^?#]*)(\?.*)?$/);
-  if (!m) { L("skip: not api.openai.com"); done({}); return; }
+  const srcHost = (url.match(/^https?:\/\/[^/]+/) || [""])[0].toLowerCase();
+  const allowed = ALLOWED_HOSTS.some(function (h) { return srcHost.indexOf(h.toLowerCase()) !== -1; });
+  if (!allowed) { L("skip: host not in whitelist: " + srcHost); done({}); return; }
+  const m = url.match(/^https?:\/\/[^/]+(\/v1\/[^?#]*)(\?.*)?$/);
+  if (!m) { L("skip: no /v1 path"); done({}); return; }
   const path = m[1];
 
   if (!up) {

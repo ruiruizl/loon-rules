@@ -17,7 +17,7 @@ auto = input,"1",type=string,tag=自动跟随地址,desc=1=自动跟随隧道地
 dbg = switch,false,tag=调试日志
 
 [Script]
-request if ${url} ~= /^https?:\/\/api\.openai\.com\/v1\// then script("https://raw.githubusercontent.com/ruiruizl/loon-rules/main/muse2api-loon.js", {${up}, ${key}, ${model}, ${models}, ${auto}}) with requires_body=true, timeout=600, tag="Muse2API 反代"
+request if ${url} ~= /^https?:\/\/(api\.openai\.com|muse\.ai|api\.muse\.ai)\/v1\// then script("https://raw.githubusercontent.com/ruiruizl/loon-rules/main/muse2api-loon.js", {${up}, ${key}, ${model}, ${models}, ${auto}}) with requires_body=true, timeout=600, tag="Muse2API 反代"
 
 [Mitm]
-hostname = api.openai.com
+hostname = api.openai.com, muse.ai, api.muse.ai
