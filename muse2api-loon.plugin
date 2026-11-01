@@ -1,0 +1,22 @@
+#!name = Muse2API 反代（muse2api-http）
+#!desc = 把自建 muse2api-http 网关（muse.ai 反代，跑在 iSH + cloudflared 隧道）包装成 OpenAI 兼容 API。Loon 劫持 api.openai.com 请求，脚本改写转发到你的网关，流式透传。填插件参数 up = 你的网关地址（如 https://xxx.trycloudflare.com/v1），key = 网关 key（默认 muse2api-local）。
+#!author = ruiruizl
+#!homepage = https://github.com/ruiruizl/loon-rules
+#!loon_version = 3.5.1(983)
+#!system = iOS,iPadOS,macOS
+#!date = 2026-11-01
+#!tag = AI,工具
+#!type = normal
+
+[Argument]
+up = input,"https://encountered-reproduced-compilation-xhtml.trycloudflare.com/v1",type=string,tag=网关地址,desc=muse2api 网关基址，含 /v1，如 https://xxx.trycloudflare.com/v1
+key = input,"muse2api-local",type=string,tag=网关Key,desc=muse2api 网关的 key，默认 muse2api-local
+model = input,"muse-spark",type=string,tag=默认模型,desc=客户端填未知模型时替换成这个，默认 muse-spark
+models = input,"muse-spark,muse,claude-sonnet-4,gpt-5",type=string,tag=已知模型列表,desc=逗号分隔，这些名字不改写直接透传
+dbg = switch,false,tag=调试日志
+
+[Script]
+request if ${url} ~= /^https?:\/\/api\.openai\.com\/v1\// then script("https://raw.githubusercontent.com/ruiruizl/loon-rules/main/muse2api-loon.js", {${up}, ${key}, ${model}, ${models}}) with requires_body=true, timeout=600, tag="Muse2API 反代"
+
+[Mitm]
+hostname = api.openai.com
