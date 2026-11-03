@@ -6,7 +6,7 @@ set -e
 export DEBIAN_FRONTEND=noninteractive
 MIRRORS="https://gh.llkk.cc/https://github.com https://ghfast.top/https://github.com https://github.com"
 apt-get update -qq
-apt-get install -y -qq unzip openssl python3 ca-certificates curl >/dev/null
+apt-get install -y -qq unzip openssl python3 ca-certificates curl iproute2 procps >/dev/null
 cd /tmp
 dl() { f=$1; p=$2; h=$3; for m in $MIRRORS; do
   curl -fsSL --retry 2 --max-time 900 -o "$f" "$m/$p" && echo "$h  $f" | sha256sum -c --quiet && return 0
@@ -164,7 +164,7 @@ if systemctl is-enabled cfnamed >/dev/null 2>&1; then systemctl restart xray hys
 sleep 25
 
 for s in xray hysteria subweb cfquick cfnamed; do echo "$s: $(systemctl is-active $s)"; done
-ss -lntup | grep -E '10085|10086|10087|10808|:443' | awk '{print $1, $5}'
+ss -lntup 2>/dev/null | grep -E '10085|10086|10087|10808|:443' | awk '{print $1, $5}' || true
 # local self-test of Hysteria2 against the public IPv6
 . $D/env; . $D/ip6
 cat > /tmp/hyc.yaml <<EOF
