@@ -1,0 +1,11 @@
+#!name= DNS 防泄露加固
+#!desc= 全量劫持明文53 + 拒绝明文53出站 + DoH跟随代理出口
+#!system= iOS
+
+[General]
+hijack-dns = *:53
+encrypted-dns-follow-outbound-mode = true
+
+[Rule]
+AND,((PROTOCOL,UDP),(DEST-PORT,53)),REJECT-DROP
+AND,((PROTOCOL,TCP),(DEST-PORT,53)),REJECT-DROP
