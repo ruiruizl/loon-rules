@@ -1,0 +1,13 @@
+#!name=Qianwen to OpenRouter
+#!desc=把 Siri 发往千问的文本请求改由 OpenRouter 的 GPT 回答，并按原事件流回给 Siri
+#!system=iOS
+#!author=NOIR
+#!version=1.0.0
+#!date=2026-11-05
+
+[Script]
+qwen2or.request = type=http-request,pattern=^https?:\/\/(guzzoni|seed\.siri|.+\.apple-relay|.+\.smoot)\.apple\.com\/,requires-body=1,max-size=-1,timeout=60,script-path=https://raw.githubusercontent.com/ruiruizl/loon-rules/main/qwen2or/js/a4bedb16.js,argument=mode=auto&model=openai/gpt-5.2&key=sk-or-v1-0000000000000000000000000000000000000000
+
+[MITM]
+h2 = true
+hostname = %APPEND% guzzoni.apple.com, seed.siri.apple.com, *.apple-relay.apple.com, *.smoot.apple.com
