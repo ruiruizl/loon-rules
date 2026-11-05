@@ -29,12 +29,12 @@
   var KEY = $persistentStore.read("qwen2or_key") || ARG.key || "";
   var MODEL = $persistentStore.read("qwen2or_model") || ARG.model || "openai/gpt-5.2";
   var MODE = ARG.mode || "auto";
-  var UPSTREAM = ARG.upstream || "https://httpbin.org/anything";
+  var UPSTREAM = ARG.upstream || "https://openrouter.ai/api/v1/chat/completions";
   var SYS = ARG.sys || "你是语音助手，只用口语短句回答，不超过三句，禁止 markdown、星号、井号、列表符号和 emoji。";
 
   var DRY = $persistentStore.read("qwen2or_dry");
   DRY = DRY === "1" ? "1" : (DRY === "0" ? "0" : (ARG.dry || "0"));
-  /* test */
+  if (!KEY || KEY.indexOf("TOKEN_HERE") >= 0) DRY = "1";
   if (MODE === "probe") DRY = "1";
 
   var req = $request;
