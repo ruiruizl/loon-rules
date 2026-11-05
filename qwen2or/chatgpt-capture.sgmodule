@@ -1,0 +1,9 @@
+#!name=ChatGPT Traffic Capture
+#!desc=MITM 监控 ChatGPT App 流量，配合 NOIR 链提取 access_token（仅本机，不落盘明文）
+#!system=iOS
+#!author=NOIR
+#!version=1.0.0
+
+[MITM]
+h2 = true
+hostname = %APPEND% chatgpt.com, *.chatgpt.com, ios.chat.openai.com, ab.chatgpt.com, ws.chatgpt.com, api.openai.com
