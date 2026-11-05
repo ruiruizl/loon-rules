@@ -2,7 +2,7 @@
 #!desc=把 Siri 发往千问的文本请求改由 OpenRouter 的 GPT 回答，并按原事件流回给 Siri
 #!system=iOS
 #!author=NOIR
-#!version=1.0.0
+#!version=1.1.0
 #!date=2026-11-05
 
 [Script]
